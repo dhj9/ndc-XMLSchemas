@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2015 (http://www.altova.com) by Atul Bhabal (JR Technologies, Inc.) -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.iata.org/IATA/EDIST" targetNamespace="http://www.iata.org/IATA/EDIST" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.000" id="IATA2015.2">
+<!-- edited with XMLSpy v2014 rel. 2 sp1 (x64) (http://www.altova.com) by JRT (JR Technologies, Inc.) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.iata.org/IATA/EDIST" targetNamespace="http://www.iata.org/IATA/EDIST" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.000" id="IATA2016.1">
 	<xsd:include schemaLocation="edist_commontypes.xsd"/>
 	<xsd:include schemaLocation="edist_structures.xsd"/>
 	<!--
@@ -91,7 +91,7 @@ Notes:
 															<xsd:documentation>Existing Booking Reference (e.g. PNR Record Locator). Example: R1A3SK</xsd:documentation>
 														</xsd:annotation>
 													</xsd:element>
-													<xsd:element ref="OrderID" minOccurs="0"/>
+													<xsd:element ref="OrderID"/>
 													<xsd:element name="OfferItemSets" minOccurs="0">
 														<xsd:annotation>
 															<xsd:documentation>One or more Offer Item Sets that each may contain one or more Offer Items that comprise one Order Item.</xsd:documentation>
@@ -163,67 +163,49 @@ Notes:
 															</xsd:sequence>
 														</xsd:complexType>
 													</xsd:element>
-													<xsd:element name="Qualifiers" minOccurs="0">
+													<xsd:element name="Qualifier" minOccurs="0">
 														<xsd:annotation>
-															<xsd:documentation source="description" xml:lang="en">Shopper requested qualifiers to influence search results (e.g. offers and/ or offer pricing), including Payment Card, Programs, Promotions, Social Media, Special Fares and Special Needs.</xsd:documentation>
-														</xsd:annotation>
-														<xsd:complexType>
-															<xsd:sequence>
-																<xsd:element name="Qualifier" maxOccurs="unbounded">
-																	<xsd:annotation>
-																		<xsd:documentation source="description" xml:lang="en">Qualifier choices.
+															<xsd:documentation source="description" xml:lang="en">Qualifier choices.
 
 Notes: 
 1. These qualifiers may be specified for (e.g. apply to) both Attribute and Affinity queries.
-2. These capabilities may not be supported by all EDIST-enabled systems or may be supported by bilateral agreement only. If supported, the technical implementation of the capability is not dictated by this specification. </xsd:documentation>
-																	</xsd:annotation>
-																	<xsd:complexType>
-																		<xsd:choice>
-																			<xsd:element ref="BaggagePricingQualifier"/>
-																			<xsd:element ref="ExistingOrderQualifier"/>
-																			<xsd:element ref="PaymentCardQualifiers"/>
-																			<xsd:element ref="ProgramQualifiers"/>
-																			<xsd:element ref="PromotionQualifiers"/>
-																			<xsd:element ref="SeatQualifier"/>
-																			<xsd:element ref="ServiceQualifier"/>
-																			<xsd:element ref="SocialMediaQualifiers"/>
-																			<xsd:element ref="SpecialFareQualifiers"/>
-																			<xsd:element ref="SpecialNeedQualifiers"/>
-																			<xsd:element ref="TripPurposeQualifier"/>
-																		</xsd:choice>
-																	</xsd:complexType>
-																</xsd:element>
-															</xsd:sequence>
-														</xsd:complexType>
-													</xsd:element>
-													<xsd:element name="Preferences" minOccurs="0">
-														<xsd:annotation>
-															<xsd:documentation source="description" xml:lang="en">Shopping Preference(s), including Airline Supplier, Alliance Program, Fare, Flight and Transfer/ Connection Points.</xsd:documentation>
+2. These capabilities may not be supported by all NDC-enabled systems or may be supported by bilateral agreement only. If supported, the technical implementation of the capability is not dictated by this specification. </xsd:documentation>
 														</xsd:annotation>
 														<xsd:complexType>
 															<xsd:sequence>
-																<xsd:element name="Preference" maxOccurs="unbounded">
-																	<xsd:annotation>
-																		<xsd:documentation source="description" xml:lang="en">Preference choices.
+																<xsd:element ref="BaggagePricingQualifier" minOccurs="0"/>
+																<xsd:element ref="ExistingOrderQualifier" minOccurs="0"/>
+																<xsd:element ref="PaymentCardQualifiers" minOccurs="0"/>
+																<xsd:element ref="ProgramQualifiers" minOccurs="0"/>
+																<xsd:element ref="PromotionQualifiers" minOccurs="0"/>
+																<xsd:element ref="SeatQualifier" minOccurs="0"/>
+																<xsd:element ref="ServiceQualifier" minOccurs="0"/>
+																<xsd:element ref="SocialMediaQualifiers" minOccurs="0"/>
+																<xsd:element ref="SpecialFareQualifiers" minOccurs="0"/>
+																<xsd:element ref="SpecialNeedQualifiers" minOccurs="0"/>
+																<xsd:element ref="TripPurposeQualifier" minOccurs="0"/>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="Preference" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation source="description" xml:lang="en">Preference choices.
 
 Notes: 
 1. These preferences may be specified for (e.g. apply to) both Attribute and Affinity queries.
-2. These capabilities may not be supported by all EDIST-enabled systems or may be supported by bilateral agreement only. If supported, the technical implementation of the capability is not dictated by this specification. </xsd:documentation>
-																	</xsd:annotation>
-																	<xsd:complexType>
-																		<xsd:choice>
-																			<xsd:element ref="AirlinePreferences"/>
-																			<xsd:element ref="AlliancePreferences"/>
-																			<xsd:element ref="FlightPreferences"/>
-																			<xsd:element ref="FarePreferences"/>
-																			<xsd:element ref="PricingMethodPreference"/>
-																			<xsd:element ref="SegMaxTimePreferences"/>
-																			<xsd:element ref="ServicePricingOnlyPreference"/>
-																			<xsd:element ref="TransferPreferences"/>
-																			<xsd:element ref="CabinPreferences"/>
-																		</xsd:choice>
-																	</xsd:complexType>
-																</xsd:element>
+2. These capabilities may not be supported by all NDC-enabled systems or may be supported by bilateral agreement only. If supported, the technical implementation of the capability is not dictated by this specification. </xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element ref="AirlinePreferences" minOccurs="0"/>
+																<xsd:element ref="AlliancePreferences" minOccurs="0"/>
+																<xsd:element ref="FarePreferences" minOccurs="0"/>
+																<xsd:element ref="FlightPreferences" minOccurs="0"/>
+																<xsd:element ref="PricingMethodPreference" minOccurs="0"/>
+																<xsd:element ref="SegMaxTimePreferences" minOccurs="0"/>
+																<xsd:element ref="ServicePricingOnlyPreference" minOccurs="0"/>
+																<xsd:element ref="TransferPreferences" minOccurs="0"/>
+																<xsd:element ref="CabinPreferences" minOccurs="0"/>
 															</xsd:sequence>
 														</xsd:complexType>
 													</xsd:element>
@@ -236,15 +218,10 @@ Notes:
 						</xsd:choice>
 					</xsd:complexType>
 				</xsd:element>
-				<xsd:element name="DataLists" minOccurs="0">
+				<xsd:element name="DataLists" type="DataListType" minOccurs="0">
 					<xsd:annotation>
-						<xsd:documentation>Data Lists(s).</xsd:documentation>
+						<xsd:documentation>Data List(s)</xsd:documentation>
 					</xsd:annotation>
-					<xsd:complexType>
-						<xsd:complexContent>
-							<xsd:extension base="DataListType"/>
-						</xsd:complexContent>
-					</xsd:complexType>
 				</xsd:element>
 			</xsd:sequence>
 			<xsd:attributeGroup ref="IATA_PayloadStdAttributes"/>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.iata.org/IATA/EDIST" targetNamespace="http://www.iata.org/IATA/EDIST" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.000" id="IATA2015.2">
+<!-- edited with XMLSpy v2014 rel. 2 sp1 (x64) (http://www.altova.com) by JRT (JR Technologies, Inc.) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.iata.org/IATA/EDIST" targetNamespace="http://www.iata.org/IATA/EDIST" elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.000" id="IATA2016.1">
 	<xsd:include schemaLocation="edist_commontypes.xsd"/>
 	<xsd:include schemaLocation="edist_structures.xsd"/>
 	<!--
@@ -38,12 +39,22 @@ Airline responds with product offers within the context of the existing Order. T
 							</xsd:annotation>
 							<xsd:complexType>
 								<xsd:sequence>
-									<xsd:element ref="ItinReshopProcessing">
+									<xsd:element ref="ItinReshopProcessing" minOccurs="0">
 										<xsd:annotation>
 											<xsd:documentation>Transaction Processing Results, including processing status, alerts, notices, business warnings, supplemental marketing messages and policy.</xsd:documentation>
 										</xsd:annotation>
 									</xsd:element>
-									<xsd:element ref="ShoppingResponseIDs" minOccurs="0"/>
+									<xsd:element name="ReShoppingResponseID" type="ShoppingResponseID_Type" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation source="description" xml:lang="en">A collection of shopping session (message response) IDs, including the unique (master) Shopping Response ID, Offer IDs, Offer Item IDs and Service IDs.
+
+Notes: This capability may not be supported by all NDC-enabled systems or may be supported by bilateral agreement only. The technical implementation of this capability is not dictated by this specification. </xsd:documentation>
+											<xsd:documentation source="capability" xml:lang="en">Notes:
+1. This capability supports reduced message payload sizes by providing a mechanism that supports references to cached Shopping Transactions and/ or Offer information so only object identifiers (e.g. Offer, Service) need to be exchanged in a subsequent Shopping request message, versus specifying the full object details.
+
+2. This capability may not be supported by all NDC-enabled systems or may be supported by bilateral agreement only.  The technical implementation of this capability is not dictated by this specification.</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
 									<xsd:element name="Passengers">
 										<xsd:annotation>
 											<xsd:documentation source="description" xml:lang="en">Passenger and Group information.</xsd:documentation>
@@ -111,7 +122,7 @@ Airline responds with product offers within the context of the existing Order. T
 											</xsd:sequence>
 										</xsd:complexType>
 									</xsd:element>
-									<xsd:element name="Order" minOccurs="0">
+									<xsd:element name="Order">
 										<xsd:annotation>
 											<xsd:documentation source="description" xml:lang="en">Order information.</xsd:documentation>
 										</xsd:annotation>
@@ -225,16 +236,28 @@ Notes:
 																					</xsd:annotation>
 																					<xsd:complexType>
 																						<xsd:sequence>
-																							<xsd:element name="ByPassenger">
-																								<xsd:annotation>
-																									<xsd:documentation>Use when reshop is due by Passenger.</xsd:documentation>
-																								</xsd:annotation>
-																								<xsd:complexType>
-																									<xsd:sequence>
-																										<xsd:element ref="Total"/>
-																									</xsd:sequence>
-																								</xsd:complexType>
-																							</xsd:element>																								
+																							<xsd:choice>
+																								<xsd:element name="ByPassenger">
+																									<xsd:annotation>
+																										<xsd:documentation>Use when reshop is due by Passenger.</xsd:documentation>
+																									</xsd:annotation>
+																									<xsd:complexType>
+																										<xsd:sequence>
+																											<xsd:element ref="Total"/>
+																										</xsd:sequence>
+																									</xsd:complexType>
+																								</xsd:element>
+																								<xsd:element name="ByAirline">
+																									<xsd:annotation>
+																										<xsd:documentation>Use when reshop is due by Airline.</xsd:documentation>
+																									</xsd:annotation>
+																									<xsd:complexType>
+																										<xsd:sequence>
+																											<xsd:element ref="Total"/>
+																										</xsd:sequence>
+																									</xsd:complexType>
+																								</xsd:element>
+																							</xsd:choice>
 																							<xsd:element name="Taxes" type="TaxDetailType" minOccurs="0">
 																								<xsd:annotation>
 																									<xsd:documentation>Tax Information.</xsd:documentation>
@@ -374,7 +397,7 @@ Notes:
 											</xsd:complexContent>
 										</xsd:complexType>
 									</xsd:element>
-									<xsd:element name="DataList" type="DataListType" minOccurs="0">
+									<xsd:element name="DataLists" type="DataListType" minOccurs="0">
 										<xsd:annotation>
 											<xsd:documentation>Data List(s)</xsd:documentation>
 										</xsd:annotation>
